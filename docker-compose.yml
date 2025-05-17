@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  api:
+    build:
+      context: ./backend
+      dockerfile: DockerFile
+    ports:
+      - "8080:8080"
+    platform: linux/amd64
+    volumes:
+      - ./migrations:/app/migrations
+      - rosterdata:/app/data
+    environment:
+      - GO_ENV=production
+    restart: unless-stopped
+  
+  employee-frontend:
+    build:
+      context: ./employee-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    volumes:
+      - ./frontend:/app
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    
+  admin-frontend:
+    build:
+      context: ./admin-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "4000:80"
+    volumes:
+      - ./frontend:/app
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+
+volumes:
+  rosterdata:

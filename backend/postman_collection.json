@@ -1,0 +1,150 @@
+{
+    "info": {
+      "name": "Payd Roster API",
+      "_postman_id": "12345678-aaaa-bbbb-cccc-123456789abc",
+      "description": "Postman collection for Payd Mini Project: Daily Worker Roster Management System",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Workers",
+        "item": [
+          {
+            "name": "Signup Worker",
+            "request": {
+              "method": "POST",
+              "header": [
+                { "key": "Content-Type", "value": "application/json" }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"name\": \"Alice\"\n}"
+              },
+              "url": { "raw": "http://localhost:8080/signup", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["signup"] }
+            }
+          },
+          {
+            "name": "List Workers",
+            "request": {
+              "method": "GET",
+              "url": { "raw": "http://localhost:8080/workers", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["workers"] }
+            }
+          },
+          {
+            "name": "Get Worker by ID",
+            "request": {
+              "method": "GET",
+              "url": {
+                "raw": "http://localhost:8080/workers/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "8080",
+                "path": ["workers", "1"]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Shifts",
+        "item": [
+          {
+            "name": "Create Shift",
+            "request": {
+              "method": "POST",
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"date\": \"2024-06-21\",\n  \"start_time\": \"09:00\",\n  \"end_time\": \"17:00\",\n  \"role\": \"Cashier\",\n  \"location\": \"Store 1\"\n}"
+              },
+              "url": { "raw": "http://localhost:8080/shifts", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["shifts"] }
+            }
+          },
+          {
+            "name": "List Shifts",
+            "request": {
+              "method": "GET",
+              "url": { "raw": "http://localhost:8080/shifts", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["shifts"] }
+            }
+          },
+          {
+            "name": "List Available Shifts",
+            "request": {
+              "method": "GET",
+              "url": { "raw": "http://localhost:8080/shifts/available", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["shifts", "available"] }
+            }
+          },
+          {
+            "name": "List Assigned Shifts",
+            "request": {
+              "method": "GET",
+              "url": { "raw": "http://localhost:8080/shifts/assigned", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["shifts", "assigned"] }
+            }
+          },
+          {
+            "name": "Update Shift (ID 1)",
+            "request": {
+              "method": "PUT",
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"date\": \"2024-06-21\",\n  \"start_time\": \"10:00\",\n  \"end_time\": \"18:00\",\n  \"role\": \"Cashier\",\n  \"location\": \"Store 1\",\n  \"assigned_worker_id\": 2\n}"
+              },
+              "url": { "raw": "http://localhost:8080/shifts/1", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["shifts", "1"] }
+            }
+          },
+          {
+            "name": "Delete Shift (ID 1)",
+            "request": {
+              "method": "DELETE",
+              "url": { "raw": "http://localhost:8080/shifts/1", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["shifts", "1"] }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Shift Requests",
+        "item": [
+          {
+            "name": "Request Shift",
+            "request": {
+              "method": "POST",
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"worker_id\": 1,\n  \"shift_id\": 1\n}"
+              },
+              "url": { "raw": "http://localhost:8080/shift-requests", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["shift-requests"] }
+            }
+          },
+          {
+            "name": "Approve Shift Request (ID 1)",
+            "request": {
+              "method": "POST",
+              "url": { "raw": "http://localhost:8080/shift-requests/1/approve", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["shift-requests", "1", "approve"] }
+            }
+          },
+          {
+            "name": "Reject Shift Request (ID 1)",
+            "request": {
+              "method": "POST",
+              "url": { "raw": "http://localhost:8080/shift-requests/1/reject", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["shift-requests", "1", "reject"] }
+            }
+          },
+          {
+            "name": "List Requests by Worker (ID 1)",
+            "request": {
+              "method": "GET",
+              "url": {
+                "raw": "http://localhost:8080/worker/1/requests",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "8080",
+                "path": ["worker", "1", "requests"]
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }

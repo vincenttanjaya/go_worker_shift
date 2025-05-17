@@ -1,0 +1,25 @@
+FROM golang:1.23 as builder
+
+# Install Go, build-essential, and SQLite for CGO
+RUN apt-get update && apt-get install -y golang gcc libc6-dev ca-certificates libsqlite3-dev make
+
+WORKDIR /app
+COPY go.mod go.sum ./
+RUN go mod download
+COPY . .
+
+# Build the binary *inside* the same base image you will use to run
+RUN CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -o app ./cmd/main
+
+RUN ls -l /app/migrations | tee /app/migrations-ls.log
+CMD ["sh", "-c", "cat /app/migrations-ls.log; ls -l /app/migrations; ./app"]
+
+# Final image - identical OS and GLIBC to build
+FROM debian:bookworm-slim
+
+WORKDIR /app
+RUN apt-get update && apt-get install -y ca-certificates libsqlite3-0 && rm -rf /var/lib/apt/lists/*
+COPY --from=builder /app/app .
+COPY --from=builder /app/migrations ./migrations
+
+CMD ["./app"]
