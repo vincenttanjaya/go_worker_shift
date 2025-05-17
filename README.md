@@ -9,7 +9,7 @@ This project is a simple scheduling and roster management system for managing sh
 - **Deployment:** Multi-service via Docker Compose
 
 ---
-
+```
 go_worker_shift/
 ├── backend/           # Go API backend
 │   ├── cmd/
@@ -22,6 +22,7 @@ go_worker_shift/
 │   └── Dockerfile
 ├── docker-compose.yml
 ├── README.md
+```
 
 ## Features
 
@@ -73,6 +74,8 @@ cd go_worker_shift
 docker compose up --build
 ```
 
+```
 API: http://localhost:8080
 Employee: http://localhost:3000
 Admin: http://localhost:4000
+```
